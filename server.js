@@ -1,52 +1,72 @@
+import * as http from "http";
+import * as https from "https";
 require("dotenv").config()
 
 import express from "express";
-import { GraphQLUpload, graphqlUploadExpress} from "graphql-upload";
+import { graphqlUploadExpress} from "graphql-upload";
 import {ApolloServer} from "apollo-server-express";
 import {typeDefs, resolvers} from "./schema.js";
 import logger from "morgan";
 import {getUser} from "./user/user.utils";
 
+import { createServer } from 'http';
+import { execute, subscribe } from 'graphql';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import {SubscriptionClient} from "subscriptions-transport-ws";
+
 const PORT = process.env.PORT
 async function startServer(port, callback){
+    const app = express()
+    const httpServer = createServer(app);
+    const schema = makeExecutableSchema({resolvers,typeDefs})
     const server = new ApolloServer({
-        resolvers,
-        typeDefs,
+        schema,
         context: async (ctx) =>{
-            if (ctx.req) {
-                return {
+            if (ctx.req){
+                return{
                     loggedInUser: await getUser(ctx.req.headers.token)
+                }}
+            },
+        plugins:[{
+            async serverWillStart(){
+                return{
+                    async drainServer(){
+                        subscriptionServer.close()
+                    }
                 }
-            } else {
-                const {
-                    connection: { context },
-                } = ctx
-                return {
-                    loggedInUser: context.loggedInUser
-                }
+            }
+        }]
+    });
+
+    const subscriptionServer = SubscriptionServer.create({
+        schema,
+        execute,
+        subscribe,
+        onConnect: async ({token},webSocket, context) =>{
+            if (!token) {
+                throw new Error("Token Not Exist")
+            } else{
+                console.log("User Connected")
+                const loggedInUser = await getUser(token)
+                return loggedInUser
             }
         },
-        subscriptions: {
-            onConnect: async ({token}) => {
-                if (!token){
-                    throw new Error("You can't listen.")
-                }
-                const loggedInUser = await getUser(token)
-                return{
-                    loggedInUser
-                }
-            }
-        }
-    });
+        onDisconnect(webSocket, context) {
+            console.log("Disconnected!");
+        },
+
+
+    },{
+        server:httpServer
+    })
+
     await server.start()
-    const app = express()
     app.use(logger("tiny"))
     app.use("/static",express.static("uploads"))
     app.use(graphqlUploadExpress())
     server.applyMiddleware({ app })
-
-    await new Promise(r=>app.listen({port: PORT}, r))
-
+    await new Promise(r=>httpServer.listen({port: PORT}, r))
     console.log(`server is running ${PORT}`)
 }
 

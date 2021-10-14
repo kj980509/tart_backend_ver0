@@ -1,3 +1,11 @@
-# Insta Clone
+# TART
 
-Instaclone Prac
+## Backend
+
+ - [ ] Create Account
+ - [ ] See Profile
+ - [ ] Login
+ - [ ] Edit Profile
+ - [ ] Follow User
+ - [ ] Unfollow User
+ - 

@@ -2,6 +2,6 @@ import {gql} from "apollo-server-express";
 
 export default gql`
     type Query{
-        seeArt(artId:Int!):Art
+        seeTotalFeed(feedId:Int!):Feed
     }
 `

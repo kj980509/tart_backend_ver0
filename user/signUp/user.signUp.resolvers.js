@@ -29,7 +29,6 @@ export default {
                     where:{userName},
                     select:{id:true} })
                 const token = await jwt.sign({id:userId}, process.env.SECRET_KEY)
-                console.log(token)
                 return{
                     ok: true,
                     token

@@ -2,19 +2,50 @@
   "name": "insta_prac",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": ""
+    "dev": "nodemon --exec babel-node server --delay 2",
+    "migrate": "npx prisma migrate dev"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kj980509/unsta_back_repo.git"
+    "url": "git+https://github.com/kj980509/tart_backend_ver0.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kj980509/unsta_back_repo/issues"
+    "url": "https://github.com/kj980509/tart_backend_ver0/issues"
   },
-  "homepage": "https://github.com/kj980509/unsta_back_repo#readme"
+  "homepage": "https://github.com/kj980509/tart_backend_ver0#readme",
+  "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "@graphql-tools/load-files": "^6.4.0",
+    "@graphql-tools/merge": "^8.1.2",
+    "@graphql-tools/schema": "^8.2.0",
+    "@prisma/client": "^3.0.1",
+    "apollo-server": "^3.3.0",
+    "apollo-server-express": "^3.3.0",
+    "aws-sdk": "^2.990.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.3",
+    "graphql-subscriptions": "^1.2.1",
+    "graphql-tools": "^8.2.0",
+    "graphql-upload": "^12.0.0",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "prettier-plugin-prisma": "^3.0.1",
+    "pubsub": "^3.2.1",
+    "subscriptions-transport-ws": "^0.9.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "nodemon": "^2.0.12",
+    "prisma": "^3.0.1",
+    "studio": "^0.13.5"
+  }
 }

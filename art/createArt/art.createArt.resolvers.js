@@ -1,5 +1,5 @@
 import client from "../../client";
-import {uploadArtToS3, uploadArtToS3ToS3} from "../../shared/shared.utils";
+import {uploadArtToS3} from "../../shared/shared.utils";
 import {GraphQLUpload} from "graphql-upload";
 export default {
     Upload: GraphQLUpload,

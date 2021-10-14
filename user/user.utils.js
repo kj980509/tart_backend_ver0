@@ -13,9 +13,9 @@ export const getUser = async (token) => {
         if(user){
             return user
         } else{
-            return null
+            return "error1"
         }
     } catch{
-        return null
+        return "error2"
     }
 }

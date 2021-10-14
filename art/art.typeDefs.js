@@ -11,11 +11,13 @@ export default gql`
         EndWorkingMonth: Int!
         EndWorkingDay: Int!
         categoryId: Int!
-        isSuccessed: Boolean 
-        user: User
+        isSuccessed: Boolean!
+        user: User!
+        totalLikes:Int!
         createdAt: String!
         updatedAt: String!
         photos: [ArtPhoto]
+        error: String
     }
     type ArtPhoto {
         id: Int!
