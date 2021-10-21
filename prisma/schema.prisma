@@ -44,6 +44,8 @@ model User {
  // Alarm
  alarms Alarm[]
 
+ // Bid
+ bids Bid[]
 
 }
 
@@ -66,10 +68,15 @@ model Art {
  photos ArtPhoto[]
  // likes
  likes ArtLike[]
- createdAt DateTime @default(now())
- updatedAt DateTime @default(now())
  // rooms
  rooms Room[]
+ // bid
+ bids Bid[]
+ basePrice Int
+ presentPrice Int
+ minimumPrice Int
+ createdAt DateTime @default(now())
+ updatedAt DateTime @default(now())
 }
 
 model Category {
@@ -159,6 +166,18 @@ model Message {
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
 }
+
+model Bid{
+ id Int @id @default(autoincrement())
+ user User @relation(fields:[userId], references:[id])
+ userId Int
+ art Art @relation(fields:[artId], references:[id])
+ artId Int
+ price Int
+ createdAt DateTime @default(now())
+ isSuccessed Boolean @default(false)
+}
+
 
 model Alarm{
  id Int @id @default(autoincrement())

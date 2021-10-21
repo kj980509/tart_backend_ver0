@@ -16,14 +16,14 @@ export default gql`
         totalLikes:Int!
         createdAt: String!
         updatedAt: String!
-        photos: [ArtPhoto]
+        photos:ArtPhoto
         error: String
     }
     type ArtPhoto {
         id: Int!
         art: Art!
         artId: Int!
-        file: String!
+        imageUrl: String!
     }
     type ArtLike {
         id: Int!

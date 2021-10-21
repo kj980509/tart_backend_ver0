@@ -13,6 +13,8 @@ export default gql`
             EndWorkingMonth: Int!
             EndWorkingDay: Int!
             images: [Upload]!
+            basePrice: Int!
+            minimumPrice: Int!
         ): MutationResponse!
     }
 `

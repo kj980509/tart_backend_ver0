@@ -5,8 +5,8 @@ export default {
         seeTotalArt: async (_,{categoryName}) =>{
             if(categoryName === "total"){
                 console.log("total")
-                const [totalCategory] = await client.art.findMany({
-                    take:2,
+                const totalCategory = await client.art.findMany({
+                    take:4,
                     skip:0,
                     orderBy:{
                         createdAt:"desc"
@@ -19,9 +19,9 @@ export default {
                     where:{name:categoryName},
                     select:{id:true}
                 })
-                const [selectedCategory] = await client.art.findMany({
+                const selectedCategory = await client.art.findMany({
                     where:{categoryId:SelectedCategoryId.id},
-                    take:2,
+                    take:4,
                     skip:0,
                     orderBy:{
                         createdAt:"desc"

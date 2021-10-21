@@ -38,7 +38,7 @@ export default {
                                 id:loggedInUser.id
                             }
                         },
-                        artId
+                        artId:art.id
                     }
                 })
 
@@ -50,6 +50,9 @@ export default {
                 } else{
                     room = await client.room.create({
                         data:{
+                            art:{
+                                connect:{id:art.id}
+                            },
                             users:{
                                 connect:[{id:userId},{id:loggedInUser.id}]
                             }
@@ -66,6 +69,7 @@ export default {
                         id:true,
                     users:true}
                 })
+                console.log(room.users)
                 if (!room){
                     return{
                         ok:false,

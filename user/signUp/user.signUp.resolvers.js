@@ -20,15 +20,14 @@ export default {
                 if (existingEmail){
                     throw new Error("이미 가입된 이메일입니다.")
                 }
+
                 // Input Data To DataBase
-                await client.user.create({
+                const user = await client.user.create({
                     data:{userName,email, gender,birth}
                 })
+
                 // Get Signed Up User Id
-                const userId = await client.user.findFirst({
-                    where:{userName},
-                    select:{id:true} })
-                const token = await jwt.sign({id:userId}, process.env.SECRET_KEY)
+                const token = await jwt.sign({id:user.id}, process.env.SECRET_KEY)
                 return{
                     ok: true,
                     token

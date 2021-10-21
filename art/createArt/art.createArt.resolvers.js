@@ -5,16 +5,28 @@ export default {
     Upload: GraphQLUpload,
     Mutation:{
         createArt: async (_,{title,category, StartWorkingYear, StartWorkingMonth,StartWorkingDay,
-            EndWorkingYear,EndWorkingMonth, EndWorkingDay, images},{loggedInUser})=>{
+            EndWorkingYear,EndWorkingMonth, EndWorkingDay, images, basePrice,minimumPrice},{loggedInUser})=>{
 
-            const NewCategory = await client.category.findFirst({where:{name:category},})
+            const categoryId = await client.category.findFirst({
+                where:{name:category},
+                select:{id:true}
+            })
+
+            if (!categoryId){
+                return{
+                    ok: false,
+                    error: "Not Defined Category."
+                }
+            }
 
             const createdArt = await client.art.create({
-                data:{title,categoryId:NewCategory.id, StartWorkingYear, StartWorkingMonth,StartWorkingDay,
-                    EndWorkingYear,EndWorkingMonth, EndWorkingDay,
-                user: {
-                    connect:{id:loggedInUser.id}
-                }}
+                data:{title,categoryId:categoryId.id, StartWorkingYear, StartWorkingMonth,StartWorkingDay,
+                    EndWorkingYear,EndWorkingMonth, EndWorkingDay,basePrice, minimumPrice,
+                    user: {
+                        connect:{id:loggedInUser.id}
+                    },
+                    presentPrice:basePrice
+                }
             })
 
             let imageUrls = []
