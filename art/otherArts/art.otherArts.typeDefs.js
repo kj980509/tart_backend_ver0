@@ -3,10 +3,10 @@ import {gql} from "apollo-server-express";
 export default gql`
     
     type Arts{
-        id: Int!
         ok: Boolean!
         error: String
         imageUrls: [String]
+        ids: [Int]
         isExist: Boolean!
     }
     

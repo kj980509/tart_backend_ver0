@@ -35,7 +35,8 @@ export default {
 
             return{
                 ok:true,
-                imageUrls: imageUrls
+                imageUrls: imageUrls,
+                ids: artIds
             }
 
         }

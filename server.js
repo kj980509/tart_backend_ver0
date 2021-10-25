@@ -1,7 +1,6 @@
 import * as http from "http";
 import * as https from "https";
 require("dotenv").config()
-
 import express from "express";
 import { graphqlUploadExpress} from "graphql-upload";
 import {ApolloServer} from "apollo-server-express";
