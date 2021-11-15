@@ -18,6 +18,8 @@ export default gql`
         updatedAt: String!
         photos:ArtPhoto
         error: String
+        bid: Bid
+        isMe: Boolean
     }
     type ArtPhoto {
         id: Int!

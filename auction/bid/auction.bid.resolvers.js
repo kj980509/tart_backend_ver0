@@ -4,7 +4,7 @@ import {NEW_BID} from "../../constants";
 
 export default {
     Mutation:{
-        bid: async (_,{userId, artId, price},{loggedInUser}) => {
+        bid: async (_,{artId, price},{loggedInUser}) => {
 
             // Art Info
             const art = await client.art.findUnique({
@@ -16,7 +16,7 @@ export default {
             })
 
             // Check Own Artist Participated Auction
-            if (userId === art.userId){
+            if (loggedInUser === art.userId){
                 return{
                     ok:false,
                     error: "You can't Participate Auction"
