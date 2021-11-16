@@ -7,7 +7,8 @@ export default {
         photos: ({id}) => client.artPhoto.findFirst({where:{artId:id}}),
         isMe: ({id},_,{loggedInUser}) =>{
             return id === loggedInUser.id
-        }
+        },
+        bid: ({id}) =>client.bid.findMany({where:{artId:id}})
     }
     ,
 
