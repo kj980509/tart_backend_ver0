@@ -18,7 +18,7 @@ export default {
                     error: "Not Defined Category."
                 }
             }
-
+            console.log(loggedInUser)
             const createdArt = await client.art.create({
                 data:{title,categoryId:categoryId.id, StartWorkingYear, StartWorkingMonth,StartWorkingDay,
                     EndWorkingYear,EndWorkingMonth, EndWorkingDay,basePrice, minimumPrice,

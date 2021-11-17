@@ -1,5 +1,3 @@
-import * as http from "http";
-import * as https from "https";
 require("dotenv").config()
 import express from "express";
 import { graphqlUploadExpress} from "graphql-upload";
@@ -46,6 +44,7 @@ async function startServer(port, callback){
             if (!token) {
                 throw new Error("Token Not Exist")
             } else{
+                console.log(token)
                 console.log("User Connected")
                 const loggedInUser = await getUser(token)
                 return loggedInUser

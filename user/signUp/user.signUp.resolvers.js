@@ -1,5 +1,6 @@
 import client from "../../client";
 import jwt from "jsonwebtoken";
+import {getUser} from "../user.utils";
 export default {
     Mutation:{
         signUp: async (_,{userName, email, gender, birth})=>{
@@ -25,9 +26,9 @@ export default {
                 const user = await client.user.create({
                     data:{userName,email, gender,birth}
                 })
-
                 // Get Signed Up User Id
                 const token = await jwt.sign({id:user.id}, process.env.SECRET_KEY)
+                const loggedUser = await getUser(token);
                 return{
                     ok: true,
                     token
