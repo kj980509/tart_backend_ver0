@@ -2,6 +2,7 @@ import client from "../../client";
 import {withFilter} from "graphql-subscriptions";
 import pubsub from "../../pubsub";
 import {NEW_BID} from "../../constants";
+import {log} from "nodemon/lib/utils";
 
 export default {
     Subscription:{
@@ -9,10 +10,11 @@ export default {
             subscribe: async (root, args, context, info) => {
 
                 // Get Bid Info
-                const art = await client.art.findUnique({
-                    where:{id: args.artId },
-                    select:{id:true}
+                const art = await client.art.findMany({
+                    where:{userId: context.id }
                 })
+
+
                 // Check Bid Exist
                 if (!art){
                     throw new Error("Art Not Found")
@@ -20,12 +22,13 @@ export default {
 
                 return withFilter(
                     () => pubsub.asyncIterator(NEW_BID),
-                    async ({bidAlarm},{artId},{loggedInUser}) =>{
-
-                        if (bidAlarm.artId === artId){
-                            console.log("asd")
-                            const art = await client.art.findUnique({
-                                where:{id:artId},
+                    async ({bidAlarm},_,context) =>{
+                        const art = await client.art.findUnique({
+                            where:{id:bidAlarm.artId}
+                        })
+                        if (art.userId === context.id){
+                            const art = await client.art.findMany({
+                                where:{userId:context.id},
                                 select:{id:true}
                             })
                             if (!art){

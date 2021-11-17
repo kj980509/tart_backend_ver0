@@ -3,10 +3,9 @@ import {gql} from "apollo-server-express";
 export default gql`
     type Bid{
         id: Int!
-        user: User
+        user: User!
         userId: Int!
-        art: Art
-        artId: Int!
+        art: Art!
         price: Int!
         createdAt: String
         isSuccessed: Boolean

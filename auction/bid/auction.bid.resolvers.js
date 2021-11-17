@@ -16,7 +16,7 @@ export default {
             })
 
             // Check Own Artist Participated Auction
-            if (loggedInUser === art.userId){
+            if (loggedInUser.id === art.userId){
                 return{
                     ok:false,
                     error: "You can't Participate Auction"
@@ -45,7 +45,6 @@ export default {
                         price
                     }
                 })
-
                 await client.art.update({
                     where:{id:artId},
                     data:{
