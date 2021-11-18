@@ -20,6 +20,8 @@ export default gql`
         error: String
         bid: [Bid]
         isMe: Boolean
+        presentPrice:Int
+        minimumPrice:Int
     }
     type ArtPhoto {
         id: Int!

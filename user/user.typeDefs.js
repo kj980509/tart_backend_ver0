@@ -13,5 +13,8 @@ export default gql`
         updatedAt: String!
         profile: String
         arts: [Art]
+        isMe: Boolean!
+        totalFollowers: Int
+        totalFollowings: Int
     }
 `

@@ -5,8 +5,8 @@ export default {
         user: ({userId}) => client.user.findUnique({where: {id: userId}}),
         totalLikes: ({id}) => client.artLike.count({where: {artId: id}}),
         photos: ({id}) => client.artPhoto.findFirst({where: {artId: id}}),
-        isMe: ({id}, _, {loggedInUser}) => {
-            return id === loggedInUser.id
+        isMe: ({userId}, _, {loggedInUser}) => {
+            return userId === loggedInUser.id
         },
         bid: ({id}) => client.bid.findMany({where: {artId: id}})
     }
