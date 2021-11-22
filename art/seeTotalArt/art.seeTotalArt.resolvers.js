@@ -2,11 +2,22 @@ import client from "../../client";
 
 export default {
     Query: {
-        seeTotalArt: async (_,{categoryName, offset}) =>{
-            if(categoryName === "total"){
-                console.log("total")
+        seeTotalArt: async (_,{categoryId, offset, take}) =>{
+
+            // Get Category Info
+            const categories = await client.artCategory.findMany({
+                select:{id:true}
+            })
+            // Check categoryId Exist
+            const categoryIds= categories.map((category) => category.id)
+            if(!(categoryIds.includes(categoryId))){
+                throw new Error("Not Defined CategoryId")
+            }
+
+            // Return Total Arts
+            if(categoryId === 0){
                 const totalCategory = await client.art.findMany({
-                    take:4,
+                    take:take,
                     skip:offset,
                     orderBy:{
                         createdAt:"desc"
@@ -15,14 +26,11 @@ export default {
                 return totalCategory
 
             } else{
-                const SelectedCategoryId = await client.category.findFirst({
-                    where:{name:categoryName},
-                    select:{id:true}
-                })
+                // Return Selected Category Arts
                 const selectedCategory = await client.art.findMany({
-                    where:{categoryId:SelectedCategoryId.id},
-                    take:4,
-                    skip:0,
+                    where:{categoryId},
+                    take:take,
+                    skip:offset,
                     orderBy:{
                         createdAt:"desc"
                     }

@@ -2,8 +2,10 @@ import client from "../../client";
 
 export default {
     Mutation:{
-        artLike: async (_,{id},{loggedInUser}) => {
-            const art = await client.art.findUnique({where: {id}})
+        artLike: async (_,{artId},{loggedInUser}) => {
+
+            // Get Art Info
+            const art = await client.art.findUnique({where: {id:artId}})
 
             // Check Existing Art
             if (!art) {
@@ -12,13 +14,14 @@ export default {
                     error: "Art Not Found."
                 }
             }
-            //
+            // Art Like Where
             const likeWhere = {
                 artId_userId: {
                     userId: loggedInUser.id,
-                    artId: id,
+                    artId: artId,
                 }
             }
+            // Check Already Liked
             const like = await client.artLike.findUnique({
                 where: likeWhere
             })

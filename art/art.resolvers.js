@@ -8,7 +8,10 @@ export default {
         isMe: ({userId}, _, {loggedInUser}) => {
             return userId === loggedInUser.id
         },
-        bid: ({id}) => client.bid.findMany({where: {artId: id}})
+        bid: ({id}) => client.bid.findMany({where: {artId: id}}),
+        artLikes: async ({id}) => await client.artLike.findMany({
+            where:{artId:id}
+        })
     },
 
     ArtPhoto: {

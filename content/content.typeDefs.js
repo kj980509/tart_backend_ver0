@@ -5,5 +5,12 @@ export default gql`
         id: Int
         imageUrl:String
         categoryId: Int!
+        contentCategory:ContentCategory
+        
+    }
+    type ContentCategory{
+        id: Int
+        category:String
+        contents:[Content]
     }
 `

@@ -3,6 +3,7 @@ import client from "../../client";
 export default {
     Query:{
         seeTotalPost: async (_,{categoryId}) =>{
+            // Get Post Info
             const posts = await client.post.findMany({
                 where:{categoryId}
             })

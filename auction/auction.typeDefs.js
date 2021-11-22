@@ -6,6 +6,7 @@ export default gql`
         user: User!
         userId: Int!
         art: Art!
+        artId: Int
         price: Int!
         createdAt: String
         isSuccessed: Boolean

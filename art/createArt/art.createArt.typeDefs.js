@@ -6,12 +6,12 @@ export default gql`
         createArt(
             title: String!
             category: String!
-            StartWorkingYear: Int!
-            StartWorkingMonth: Int!
-            StartWorkingDay: Int!
-            EndWorkingYear: Int!
-            EndWorkingMonth: Int!
-            EndWorkingDay: Int!
+            WorkingStartYear: Int!
+            WorkingStartMonth: Int!
+            WorkingStartDay: Int!
+            WorkingEndYear: Int!
+            WorkingEndMonth: Int!
+            WorkingEndDay: Int!
             images: [Upload]!
             basePrice: Int!
             minimumPrice: Int!

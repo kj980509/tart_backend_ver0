@@ -2,29 +2,36 @@ import {gql} from "apollo-server-express";
 
 export default gql`
     type Post {
+        # Post Info
         id: Int
-        user: User ## User
-        userId: Int
         title: String
         post: String
         imageUrl: String
-        category: PostCategory ## Category
-        comments: [PostComment]
+        category: PostCategory
+        categoryId:Int
         isHot: Boolean
+        totalLikes: Int
         updatedAt: String
         createdAt: String
+        ## User
+        user: User 
+        userId: Int
+        ## Comments
+        comments: [PostComment]
         error: String
-        totalLikes: Int
     }
     type PostCategory {
         id: Int!
         category: String
+        posts:[Post]
     }
     type PostComment {
         id: Int
         user: User
+        userId: Int
         comment: String
         rootCommentId: Int
+        post:Post
         postId: Int
     }
     
