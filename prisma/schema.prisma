@@ -50,12 +50,14 @@ model Art {
  user User @relation(fields: [userId], references: [id])
  userId Int
  title String
- StartWorkingYear Int
- StartWorkingMonth Int
- StartWorkingDay Int
- EndWorkingYear Int
- EndWorkingMonth Int
- EndWorkingDay Int
+ WorkingStartYear Int
+ WorkingStartMonth Int
+ WorkingStartDay Int
+ WorkingEndYear Int
+ WorkingEndMonth Int
+ WorkingEndDay Int
+ // Art Category
+ category ArtCategory @relation(fields: [categoryId], references:[id])
  categoryId Int
  isSuccessed Boolean @default(false)
  // Successed Date
@@ -73,8 +75,9 @@ model Art {
  updatedAt DateTime @default(now())
 }
 
-model Category {
+model ArtCategory {
  id Int @id @default(autoincrement())
+ arts Art[]
  name String
 }
 

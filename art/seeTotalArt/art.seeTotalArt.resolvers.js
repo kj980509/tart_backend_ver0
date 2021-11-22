@@ -2,12 +2,12 @@ import client from "../../client";
 
 export default {
     Query: {
-        seeTotalArt: async (_,{categoryName}) =>{
+        seeTotalArt: async (_,{categoryName, offset}) =>{
             if(categoryName === "total"){
                 console.log("total")
                 const totalCategory = await client.art.findMany({
                     take:4,
-                    skip:0,
+                    skip:offset,
                     orderBy:{
                         createdAt:"desc"
                     }

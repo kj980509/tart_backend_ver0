@@ -2,26 +2,31 @@ import {gql} from "apollo-server-express";
 
 export default gql`
     type Art {
+        # Art Info
         id: Int!
         title: String!
-        StartWorkingYear: Int!
-        StartWorkingMonth: Int!
-        StartWorkingDay: Int!
-        EndWorkingYear: Int!
-        EndWorkingMonth: Int!
-        EndWorkingDay: Int!
+        WorkingStartYear: Int!
+        WorkingStartMonth: Int!
+        WorkingStartDay: Int!
+        WorkingEndYear: Int!
+        WorkingEndMonth: Int!
+        WorkingEndDay: Int!
         categoryId: Int!
         isSuccessed: Boolean!
-        user: User!
         totalLikes:Int!
-        createdAt: String!
-        updatedAt: String!
-        photos:ArtPhoto
-        error: String
-        bid: [Bid]
-        isMe: Boolean
         presentPrice:Int
         minimumPrice:Int
+        createdAt: String!
+        updatedAt: String!
+        # photos
+        photos:[ArtPhoto]
+        # User Info
+        user: User!
+        userId: Int
+        isMe: Boolean
+        # Bid
+        bid: [Bid]
+        error: String
     }
     type ArtPhoto {
         id: Int!

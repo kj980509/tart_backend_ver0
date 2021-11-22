@@ -2,17 +2,25 @@ import client from "../client";
 
 export default {
     Art: {
-        user: ({userId}) => client.user.findUnique({where: {id: userId}}),
-        totalLikes: ({id}) => client.artLike.count({where: {artId: id}}),
-        photos: ({id}) => client.artPhoto.findFirst({where: {artId: id}}),
+        user: async({userId}) => await client.user.findUnique({where: {id: userId}}),
+        totalLikes: async({id}) => await client.artLike.count({where: {artId: id}}),
+        photos: async ({id}) => await client.artPhoto.findMany({where: {artId: id}}),
         isMe: ({userId}, _, {loggedInUser}) => {
             return userId === loggedInUser.id
         },
         bid: ({id}) => client.bid.findMany({where: {artId: id}})
-    }
-    ,
+    },
 
     ArtPhoto: {
-        art: ({artId}) => client.user.findUnique({where: {id: artId}})
+        art: async ({artId}) => await client.art.findUnique({where: {id: artId}})
+    },
+
+    ArtLike: {
+        art: async (artId) => await client.art.findUnique({
+            where:{id:artId}
+        }),
+        user: async (userId) => await client.user.findUnique({
+            where:{id:userId}
+        })
     }
 }

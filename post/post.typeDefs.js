@@ -4,6 +4,7 @@ export default gql`
     type Post {
         id: Int
         user: User ## User
+        userId: Int
         title: String
         post: String
         imageUrl: String

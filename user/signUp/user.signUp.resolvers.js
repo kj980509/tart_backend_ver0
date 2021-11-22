@@ -6,18 +6,21 @@ export default {
         signUp: async (_,{userName, email, gender, birth})=>{
 
             try{
-                // Check existing userName
-                const ExistingUserName = await client.user.findFirst({where:{userName}})
+
+                // Check userName existing
+                const ExistingUserName = await client.user.findFirst({
+                    where:{userName},
+                    select:{userName:true}
+                })
                 if (ExistingUserName){
                     throw new Error("이미 존재하는 유저명입니다.")
                 }
-                // Check existing Email
-                console.log(email)
+
+                // Check Email existing
                 const existingEmail = await client.user.findFirst({
                     where:{email},
                     select:{email:true}
                 })
-                console.log(existingEmail)
                 if (existingEmail){
                     throw new Error("이미 가입된 이메일입니다.")
                 }
@@ -26,9 +29,8 @@ export default {
                 const user = await client.user.create({
                     data:{userName,email, gender,birth}
                 })
-                // Get Signed Up User Id
+                // Issue Token
                 const token = await jwt.sign({id:user.id}, process.env.SECRET_KEY)
-                const loggedUser = await getUser(token);
                 return{
                     ok: true,
                     token
