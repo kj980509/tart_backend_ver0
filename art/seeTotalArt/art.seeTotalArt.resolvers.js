@@ -10,19 +10,21 @@ export default {
             })
             // Check categoryId Exist
             const categoryIds= categories.map((category) => category.id)
+            categoryIds.push(0);
             if(!(categoryIds.includes(categoryId))){
                 throw new Error("Not Defined CategoryId")
             }
-
             // Return Total Arts
             if(categoryId === 0){
+                console.log(0)
                 const totalCategory = await client.art.findMany({
-                    take:take,
                     skip:offset,
+                    take:take,
                     orderBy:{
                         createdAt:"desc"
                     }
                 })
+                console.log(totalCategory)
                 return totalCategory
 
             } else{
@@ -35,6 +37,7 @@ export default {
                         createdAt:"desc"
                     }
                 })
+                console.log(selectedCategory)
                 return selectedCategory
 
             }
