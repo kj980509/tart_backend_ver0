@@ -1,4 +1,5 @@
 import client from "../client";
+import {assertWrappingType} from "graphql";
 
 export default {
     Art: {
@@ -8,10 +9,12 @@ export default {
         isMe: ({userId}, _, {loggedInUser}) => {
             return userId === loggedInUser.id
         },
-        bid: ({id}) => client.bid.findMany({where: {artId: id}}),
+        bid: async ({id}) => await client.bid.findMany({where: {artId: id}}),
         artLikes: async ({id}) => await client.artLike.findMany({
             where:{artId:id}
-        })
+        }),
+        questions: async ({id}) => await client.artQuestion.findMany({artId:id}),
+        answers: async ({id}) => await client.artAnswer.findMany({where:{artId:id}})
     },
 
     ArtPhoto: {

@@ -30,6 +30,8 @@ model User {
  // Art
  arts Art[]
  artLikes ArtLike[]
+ artQuestions ArtQuestion[]
+ artAnswers ArtAnswer[]
 
  // Alarm
  alarms Alarm[]
@@ -65,7 +67,9 @@ model Art {
  photos ArtPhoto[]
  // likes
  likes ArtLike[]
- // rooms
+ // questions
+ questions ArtQuestion[]
+ answers ArtAnswer[]
  // bid
  bids Bid[]
  basePrice Int
@@ -98,6 +102,33 @@ model ArtLike {
  updatedAt DateTime @updatedAt
  @@unique([artId, userId])
 }
+
+model ArtQuestion{
+ id Int @id @default(autoincrement())
+ user User @relation(fields:[userId], references:[id])
+ userId Int
+ art Art @relation(fields:[artId], references:[id])
+ artId Int
+ question String
+ isAnswerd Boolean @default(false)
+ answers ArtAnswer[]
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+}
+
+model ArtAnswer{
+ id Int @id @default(autoincrement())
+ user User @relation(fields:[userId], references:[id])
+ userId Int
+ art Art @relation(fields:[artId], references:[id])
+ artId Int
+ answer String
+ question ArtQuestion @relation(fields:[questionId], references:[id])
+ questionId Int
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+}
+
 model Bid{
  id Int @id @default(autoincrement())
  user User @relation(fields:[userId], references:[id])

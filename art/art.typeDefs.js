@@ -29,6 +29,9 @@ export default gql`
         # Bid
         bid: [Bid]
         error:String
+        # QnA
+        questions:[ArtQuestion]
+        answers:[ArtAnswer]
     }
     type ArtPhoto {
         id: Int!
@@ -44,5 +47,29 @@ export default gql`
         userId: Int!
         createdAt: String!
         updatedAt: String!
+    }
+    type ArtQuestion{
+        id: Int
+        user: User
+        userId: Int
+        art: Art
+        artId: Int
+        question: String
+        isAnswered: Boolean
+        answers: ArtAnswer
+        createdAt: String
+        updatedAt: String
+    }
+    type ArtAnswer{
+        id: Int
+        user: User
+        userId: Int
+        art: Art
+        artId: Int
+        answer: String
+        question: ArtQuestion
+        questionId: Int
+        createdAt: String
+        updatedAt: String
     }
 `
