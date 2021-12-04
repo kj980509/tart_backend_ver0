@@ -5,7 +5,7 @@ export default {
     Upload: GraphQLUpload,
     Mutation:{
         createArt: async (_,{title,category, WorkingStartYear, WorkingStartMonth,WorkingStartDay,
-            WorkingEndYear,WorkingEndMonth, WorkingEndDay, images, basePrice,minimumPrice},{loggedInUser})=>{
+            WorkingEndYear,WorkingEndMonth, WorkingEndDay, images, basePrice,minimumPrice, explain},{loggedInUser})=>{
 
             // Get Category Id
             const categoryId = await client.artCategory.findFirst({
@@ -24,7 +24,7 @@ export default {
             // Create Art & Get Info
             const createdArt = await client.art.create({
                 data:{title, WorkingStartYear, WorkingStartMonth,WorkingStartDay,
-                    WorkingEndYear,WorkingEndMonth, WorkingEndDay,basePrice, minimumPrice,
+                    WorkingEndYear,WorkingEndMonth, WorkingEndDay,basePrice, minimumPrice,explain,
                     user: {
                         connect:{id:loggedInUser.id}
                     },

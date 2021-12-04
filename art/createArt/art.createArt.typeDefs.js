@@ -15,6 +15,7 @@ export default gql`
             images: [Upload]!
             basePrice: Int!
             minimumPrice: Int!
+            explain: String!
         ): MutationResponse!
     }
 `

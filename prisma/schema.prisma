@@ -17,6 +17,7 @@ model User {
  email String @unique
  gender String
  birth Int
+ password String
  isDev Boolean @default(false)
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt
@@ -58,6 +59,7 @@ model Art {
  WorkingEndYear Int
  WorkingEndMonth Int
  WorkingEndDay Int
+ explain String
  // Art Category
  category ArtCategory @relation(fields: [categoryId], references:[id])
  categoryId Int
@@ -110,7 +112,7 @@ model ArtQuestion{
  art Art @relation(fields:[artId], references:[id])
  artId Int
  question String
- isAnswerd Boolean @default(false)
+ isAnswered Boolean @default(false)
  answers ArtAnswer[]
  createdAt DateTime @default(now())
  updatedAt DateTime @updatedAt

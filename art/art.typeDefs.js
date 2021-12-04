@@ -16,6 +16,7 @@ export default gql`
         totalLikes:Int
         presentPrice:Int
         minimumPrice:Int
+        explain: String
         createdAt: String
         updatedAt: String
         # photos

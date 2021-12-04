@@ -1,9 +1,10 @@
 import client from "../../client";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import {getUser} from "../user.utils";
 export default {
     Mutation:{
-        signUp: async (_,{userName, email, gender, birth})=>{
+        signUp: async (_,{userName, email, gender, birth,password})=>{
 
             try{
 
@@ -26,8 +27,10 @@ export default {
                 }
 
                 // Input Data To DataBase
+                const hashedPassword = await bcrypt.hash(password,5)
                 const user = await client.user.create({
-                    data:{userName,email, gender,birth}
+                    data:{userName,email, gender,birth,
+                        password:hashedPassword}
                 })
                 // Issue Token
                 const token = await jwt.sign({id:user.id}, process.env.SECRET_KEY)

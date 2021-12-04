@@ -11,6 +11,7 @@ export default gql`
         categoryId:Int
         isHot: Boolean
         totalLikes: Int
+        isMine: Boolean
         updatedAt: String
         createdAt: String
         ## User
@@ -33,6 +34,7 @@ export default gql`
         rootCommentId: Int
         post:Post
         postId: Int
+        isMine: Boolean
     }
     
     

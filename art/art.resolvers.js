@@ -13,7 +13,7 @@ export default {
         artLikes: async ({id}) => await client.artLike.findMany({
             where:{artId:id}
         }),
-        questions: async ({id}) => await client.artQuestion.findMany({artId:id}),
+        questions: async ({id}) => await client.artQuestion.findMany({where:{artId:id}}),
         answers: async ({id}) => await client.artAnswer.findMany({where:{artId:id}})
     },
 

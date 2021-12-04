@@ -32,8 +32,9 @@ export default {
             // Upload Image
             let imageUrl = null;
             if (profile){
-                imageUrl = uploadProfileToS3(profile, userId,"profile")
+                imageUrl = await uploadProfileToS3(profile, userId,"profile")
             }
+            console.log(imageUrl);
 
             // Update Info
             await client.user.update({

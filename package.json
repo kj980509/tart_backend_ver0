@@ -38,7 +38,8 @@
     "morgan": "^1.10.0",
     "prettier-plugin-prisma": "^3.0.1",
     "pubsub": "^3.2.1",
-    "subscriptions-transport-ws": "^0.9.19"
+    "subscriptions-transport-ws": "^0.9.19",
+    "whatwg-url": "^11.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
