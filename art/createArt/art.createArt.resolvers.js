@@ -1,11 +1,11 @@
 import client from "../../client";
 import {uploadArtToS3} from "../../shared/shared.utils";
 import {GraphQLUpload} from "graphql-upload";
+//WorkingStartYear, WorkingStartMonth,WorkingStartDay,WorkingEndYear,WorkingEndMonth, WorkingEndDay,minimumPrice,
 export default {
     Upload: GraphQLUpload,
     Mutation:{
-        createArt: async (_,{title,category, WorkingStartYear, WorkingStartMonth,WorkingStartDay,
-            WorkingEndYear,WorkingEndMonth, WorkingEndDay, images, basePrice,minimumPrice, explain},{loggedInUser})=>{
+        createArt: async (_,{title,category, images, basePrice, explain},{loggedInUser})=>{
 
             // Get Category Id
             const categoryId = await client.artCategory.findFirst({
@@ -23,8 +23,7 @@ export default {
 
             // Create Art & Get Info
             const createdArt = await client.art.create({
-                data:{title, WorkingStartYear, WorkingStartMonth,WorkingStartDay,
-                    WorkingEndYear,WorkingEndMonth, WorkingEndDay,basePrice, minimumPrice,explain,
+                data:{title, basePrice,explain,
                     user: {
                         connect:{id:loggedInUser.id}
                     },

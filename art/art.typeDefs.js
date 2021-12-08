@@ -73,4 +73,8 @@ export default gql`
         createdAt: String
         updatedAt: String
     }
+    type ArtCategory{
+        id:Int
+        name: String
+    }
 `

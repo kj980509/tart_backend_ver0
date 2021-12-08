@@ -53,12 +53,12 @@ model Art {
  user User @relation(fields: [userId], references: [id])
  userId Int
  title String
- WorkingStartYear Int
- WorkingStartMonth Int
- WorkingStartDay Int
- WorkingEndYear Int
- WorkingEndMonth Int
- WorkingEndDay Int
+ WorkingStartYear Int?
+ WorkingStartMonth Int?
+ WorkingStartDay Int?
+ WorkingEndYear Int?
+ WorkingEndMonth Int?
+ WorkingEndDay Int?
  explain String
  // Art Category
  category ArtCategory @relation(fields: [categoryId], references:[id])
@@ -76,7 +76,7 @@ model Art {
  bids Bid[]
  basePrice Int
  presentPrice Int
- minimumPrice Int
+ minimumPrice Int?
  createdAt DateTime @default(now())
  updatedAt DateTime @default(now())
 }

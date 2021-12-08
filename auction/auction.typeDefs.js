@@ -10,5 +10,6 @@ export default gql`
         price: Int!
         createdAt: String
         isSuccessed: Boolean
+        error: String
     }
 `

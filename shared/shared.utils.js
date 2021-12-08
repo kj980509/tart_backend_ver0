@@ -10,7 +10,7 @@ AWS.config.update({
 export const uploadArtToS3 = async (file, artId, folderName ) =>{
     const {filename, createReadStream } = await file
     const readStream = createReadStream()
-    const objectName = `${folderName}/${artId}_${filename}`
+    const objectName = `${folderName}/${artId}`
     const {Location} = await new AWS.S3().upload({
         Bucket: "insta-prac",
         Key: objectName,
