@@ -192,6 +192,7 @@ model Post{
  imageUrl String?
  comments PostComment[]
  likes PostLike[]
+ commentLikes PostCommentLike[]
  isHot Boolean @default(false)
  updatedAt DateTime @updatedAt
  createdAt DateTime @default(now())
@@ -225,6 +226,8 @@ model PostCommentLike{
  id Int @id @default(autoincrement())
  user User @relation(fields:[userId], references:[id])
  userId Int
+ post Post @relation(fields:[postId], references:[id])
+ postId Int
  comment PostComment @relation(fields:[commentId], references:[id])
  commentId Int
  createdAt DateTime @default(now())

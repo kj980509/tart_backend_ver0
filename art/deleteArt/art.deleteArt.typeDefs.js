@@ -2,9 +2,9 @@ import {gql} from "apollo-server-express";
 
 export default gql`
     type Mutation{
-        deletePost(
+        deleteArt(
+            artId:Int!
             userId:Int!
-            postId:Int!
         ):MutationResponse!
     }
-`
+`;
