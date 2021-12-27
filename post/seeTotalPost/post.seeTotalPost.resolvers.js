@@ -4,7 +4,11 @@ export default {
     Query:{
         seeTotalPost: async (_,{categoryId}) =>{
             // Get Post Info
-            const posts = await client.post.findMany({
+            let posts = null;
+            if (categoryId === 0){
+                posts = await client.post.findMany()
+            }
+            posts = await client.post.findMany({
                 where:{categoryId}
             })
             if (!posts){

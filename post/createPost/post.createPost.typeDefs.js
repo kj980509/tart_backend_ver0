@@ -6,7 +6,7 @@ export default gql`
             categoryId: Int!
             title: String!
             post: String!
-            image:Upload
+            images:[Upload]
         ):MutationResponse!
     }
 `

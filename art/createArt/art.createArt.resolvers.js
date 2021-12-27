@@ -9,7 +9,7 @@ export default {
 
             // Get Category Id
             const categoryId = await client.artCategory.findFirst({
-                where:{name:category},
+                where:{category},
                 select:{id:true}
             })
 

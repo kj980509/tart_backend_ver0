@@ -84,7 +84,7 @@ model Art {
 model ArtCategory {
  id Int @id @default(autoincrement())
  arts Art[]
- name String
+ category String
 }
 
 model ArtPhoto {
@@ -154,6 +154,7 @@ model Alarm{
 
 model Banner {
  id Int @id @default(autoincrement())
+ isActive Boolean @default(false)
  imageUrl String
  updatedAt DateTime @updatedAt
  createdAt DateTime @default(now())
@@ -193,11 +194,17 @@ model Post{
  comments PostComment[]
  likes PostLike[]
  commentLikes PostCommentLike[]
+ images PostPhoto[]
  isHot Boolean @default(false)
  updatedAt DateTime @updatedAt
  createdAt DateTime @default(now())
 }
-
+model PostPhoto{
+ id Int @id @default(autoincrement())
+ post Post @relation(fields:[postId], references:[id])
+ postId Int
+ imageUrl String
+}
 model PostLike{
  id Int @id @default(autoincrement())
  user User @relation(fields:[userId], references:[id])
